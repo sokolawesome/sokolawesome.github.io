@@ -1,0 +1,105 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import projects from '../data/projects.json';
+
+const birthDate = new Date('1997-07-22');
+const age = Math.floor(
+  (Date.now() - birthDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25)
+);
+---
+
+<MainLayout title="Aleksandr Sokolov | Portfolio">
+  <Header />
+
+  <section id="home" class="py-20 bg-[var(--bg-base)]">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-6xl font-mono animate-fade-in">
+        Hi, I'm Aleksandr Sokolov
+      </h1>
+      <p class="mt-4 text-xl">A Software Engineer</p>
+      <a
+        href="#projects"
+        class="mt-6 inline-block px-6 py-3 bg-[var(--accent)] text-[var(--bg-base)] rounded hover:bg-opacity-80"
+      >
+        View Projects
+      </a>
+    </div>
+  </section>
+
+  <section id="about" class="py-20 bg-[#181825]">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-mono animate-fade-in">About Me</h2>
+      <p class="mt-4">
+        I'm a Software Engineer. I'm {age}
+        years old and love building things for the web.
+      </p>
+      <ul class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <li class="bg-[var(--bg-base)] p-2 rounded">JavaScript</li>
+        <li class="bg-[var(--bg-base)] p-2 rounded">TypeScript</li>
+        <li class="bg-[var(--bg-base)] p-2 rounded">Astro</li>
+        <li class="bg-[var(--bg-base)] p-2 rounded">Tailwind CSS</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" class="py-20 bg-[var(--bg-base)]">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-mono animate-fade-in">Projects</h2>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          projects.map((project) => (
+            <ProjectCard
+              title={project.title}
+              description={project.description}
+              link={project.link}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 bg-[#181825]">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-mono animate-fade-in">Get in Touch</h2>
+      <p class="mt-4">
+        Reach me at <a
+          href="mailto:sokolawesome@gmail.com"
+          class="text-[var(--accent)] hover:underline">sokolawesome@gmail.com</a
+        >
+      </p>
+      <div class="mt-6 flex justify-center space-x-4">
+        <a
+          href="https://github.com/sokolawesome"
+          class="text-[var(--accent)] hover:underline">GitHub</a
+        >
+        <a
+          href="https://www.linkedin.com/in/sokolov-aleksandr/"
+          class="text-[var(--accent)] hover:underline">LinkedIn</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</MainLayout>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

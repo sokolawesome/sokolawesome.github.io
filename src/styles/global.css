@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-base: #1e1e2e;
+  --bg-subtle: #181825;
+  --text-base: #cdd6f4;
+  --accent: #cba6f7;
+  --accent-hover: #b4befe;
+}
+
+body {
+  @apply bg-[var(--bg-base)] text-[var(--text-base)] font-sans min-h-screen flex flex-col;
+}
+
+h1,
+h2,
+h3 {
+  @apply font-mono tracking-tight;
+}
+
+h1 {
+  @apply text-4xl md:text-6xl font-bold;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl font-semibold;
+}
+
+a,
+button {
+  @apply transition-colors duration-200;
+}
+
+a:hover,
+button:hover {
+  @apply text-[var(--accent-hover)];
+}
+
+section {
+  @apply scroll-mt-16;
+}
+
+.container {
+  @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+}

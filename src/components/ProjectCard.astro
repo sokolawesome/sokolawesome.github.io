@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  link: string;
+}
+
+const { title, description, link } = Astro.props;
+---
+
+<div
+  class="p-4 bg-[#181825] rounded-lg shadow hover:scale-105 transition-transform"
+>
+  <h3 class="text-lg font-mono">{title}</h3>
+  <p class="mt-2">{description}</p>
+  <a href={link} class="mt-4 inline-block text-[var(--accent)] hover:underline">
+    View Project
+  </a>
+</div>

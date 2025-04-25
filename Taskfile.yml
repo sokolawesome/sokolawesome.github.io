@@ -1,0 +1,23 @@
+version: "3"
+
+tasks:
+  install:
+    cmds:
+      - npm install
+    desc: Install dependencies
+  dev:
+    cmds:
+      - npm run dev
+    desc: Start development server
+  build:
+    cmds:
+      - npm run build
+    desc: Build static site
+  lint:
+    cmds:
+      - npm run lint
+    desc: Run ESLint
+  format:
+    cmds:
+      - npm run format
+    desc: Run Prettier

@@ -1,0 +1,38 @@
+---
+const navItems = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Contact', href: '#contact' },
+];
+---
+
+<header class="sticky top-0 bg-[var(--bg-base)] z-10 py-4">
+  <nav class="container mx-auto px-4 flex justify-between items-center">
+    <a href="/" class="text-xl font-mono">Aleksandr Sokolov</a>
+    <ul class="hidden md:flex space-x-6">
+      {
+        navItems.map((item) => (
+          <li>
+            <a href={item.href} class="hover:text-[var(--accent)]">
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <button class="md:hidden">Menu</button>
+  </nav>
+</header>
+
+<style>
+  button {
+    @apply text-[var(--text-base)] hover:text-[var(--accent)];
+  }
+</style>
+
+<script>
+  document.querySelector('button')?.addEventListener('click', () => {
+    alert('Hamburger menu placeholder');
+  });
+</script>
