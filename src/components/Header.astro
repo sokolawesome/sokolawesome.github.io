@@ -14,8 +14,8 @@ const navItems = [
   <nav class="container flex justify-between items-center">
     <a href="/" class="text-2xl font-mono text-[var(--accent)]">sokolawesome</a>
 
-    <div class="hidden md:flex items-center space-x-6">
-      <ul class="flex space-x-8">
+    <div class="flex items-center space-x-6">
+      <ul class="hidden md:flex space-x-8">
         {
           navItems.map((item) => (
             <li>
@@ -29,15 +29,13 @@ const navItems = [
           ))
         }
       </ul>
-      <ThemeToggle />
-    </div>
 
-    <div class="flex items-center space-x-2 md:hidden">
       <ThemeToggle />
+
       <button
         id="mobile-menu-button"
         aria-label="Toggle menu"
-        class="p-2 text-[var(--text-base)] hover:text-[var(--accent-hover)]"
+        class="p-2 text-[var(--text-base)] hover:text-[var(--accent-hover)] md:hidden"
       >
         <svg
           id="menu-icon"

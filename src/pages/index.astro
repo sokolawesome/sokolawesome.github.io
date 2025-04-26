@@ -5,7 +5,6 @@ import Footer from '@components/Footer.astro';
 import ProjectCard from '@components/ProjectCard.astro';
 import ExperienceItem from '@components/ExperienceItem.astro';
 import TechnologiesList from '@components/TechnologiesList.astro';
-import FadeIn from '@components/FadeIn.astro';
 import type { Side, Project, Experience, Technology } from '../types';
 
 import projects from '../data/projects.json' assert { type: 'json' };
@@ -27,15 +26,17 @@ const age = Math.floor(
 
   <section id="home" class="py-24 sm:py-32 bg-[var(--bg-base)]">
     <div class="container text-center">
-      <h1 class="text-5xl sm:text-6xl md:text-7xl font-mono fade-in-up">
+      <h1
+        class="text-5xl sm:text-6xl md:text-7xl font-mono fade-in-up stagger-1"
+      >
         Hi, I'm Aleksandr Sokolov
       </h1>
-      <p class="mt-6 text-lg sm:text-xl max-w-2xl mx-auto fade-in-up">
+      <p class="mt-6 text-lg sm:text-xl max-w-2xl mx-auto fade-in-up stagger-2">
         A Software Engineer
       </p>
       <a
         href="#projects"
-        class="mt-8 inline-block px-8 py-3 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors duration-300 fade-in-up"
+        class="mt-8 inline-block px-8 py-3 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors duration-300 fade-in-up stagger-3"
       >
         View Projects
       </a>
@@ -44,48 +45,29 @@ const age = Math.floor(
 
   <section id="about" class="py-20 sm:py-24 bg-[var(--bg-subtle)]">
     <div class="container">
-      <h2 class="text-3xl sm:text-4xl font-mono fade-in-up">About Me</h2>
+      <h2 class="text-3xl sm:text-4xl font-mono fade-in-up stagger-1">
+        About Me
+      </h2>
 
-      <p class="mt-6 text-lg max-w-3xl fade-in-up">
+      <p class="mt-6 text-lg max-w-3xl fade-in-up stagger-2">
         I'm a Software Engineer who loves to build things. I'm {age} years old.
       </p>
 
-      <div
-        class="mt-10 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-      >
-        {
-          typedTechnologies.map(({ category, items }, i) => (
-            <div
-              class="fade-in-up border border-[var(--border)] rounded-2xl bg-[var(--surface)] p-6 shadow-sm hover:shadow-md transition-all"
-              style={{ animationDelay: `${i * 0.15}s` }}
-            >
-              <h3 class="text-lg font-mono text-[var(--accent)] mb-4 text-center">
-                {category}
-              </h3>
-
-              <ul class="flex flex-wrap justify-center gap-2">
-                {items.map((tech, j) => (
-                  <li class="bg-[var(--surface)] p-2 rounded-lg text-center text-[var(--text-base)] border border-[var(--border)] text-sm">
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
+      <div class="fade-in-up stagger-3">
+        <TechnologiesList technologies={typedTechnologies} />
       </div>
     </div>
   </section>
 
   <section id="experience" class="py-20 sm:py-24 bg-[var(--bg-base)]">
     <div class="container">
-      <FadeIn delay={0.2} direction="up">
+      <div class="fade-in-up stagger-1">
         <h2 class="text-3xl sm:text-4xl font-mono mb-12">Experience</h2>
-      </FadeIn>
+      </div>
       <div class="timeline-container">
         {
-          typedExperiences.map((exp, index) => (
-            <div class="fade-in-up">
+          typedExperiences.map((exp) => (
+            <div class="fade-in-up stagger-2">
               <ExperienceItem
                 company={exp.company}
                 position={exp.position}
@@ -102,11 +84,13 @@ const age = Math.floor(
 
   <section id="projects" class="py-20 sm:py-24 bg-[var(--bg-subtle)]">
     <div class="container">
-      <h2 class="text-3xl sm:text-4xl font-mono mb-8 fade-in-up">Projects</h2>
+      <h2 class="text-3xl sm:text-4xl font-mono mb-8 fade-in-up stagger-1">
+        Projects
+      </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {
-          typedProjects.map((project, index) => (
-            <div class="fade-in-up">
+          typedProjects.map((project) => (
+            <div class="fade-in-up stagger-2">
               <ProjectCard
                 title={project.title}
                 description={project.description}
@@ -123,15 +107,17 @@ const age = Math.floor(
 
   <section id="contact" class="py-20 sm:py-24 bg-[var(--bg-base)]">
     <div class="container text-center">
-      <h2 class="text-3xl sm:text-4xl font-mono fade-in-up">Get in Touch</h2>
-      <p class="mt-6 text-lg fade-in-up">
+      <h2 class="text-3xl sm:text-4xl font-mono fade-in-up stagger-1">
+        Get in Touch
+      </h2>
+      <p class="mt-6 text-lg fade-in-up stagger-2">
         Reach me at <a
           href="mailto:sokolawesome@gmail.com"
           class="text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors duration-300"
           >sokolawesome@gmail.com</a
         >
       </p>
-      <div class="mt-8 flex justify-center space-x-6 fade-in-up">
+      <div class="mt-8 flex justify-center space-x-6 fade-in-up stagger-3">
         <a
           href="https://github.com/sokolawesome"
           class="text-[var(--accent)] hover:text-[var(--accent-hover)] text-lg transition-colors duration-300"
@@ -158,24 +144,22 @@ const age = Math.floor(
     };
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting && entry.target instanceof HTMLElement) {
-          const delay = entry.target.dataset.index
-            ? parseFloat(entry.target.dataset.index) * 0.1
-            : 0;
-          entry.target.style.animationDelay = `${delay}s`;
-          entry.target.style.animationPlayState = 'running';
+          entry.target.classList.add('is-visible');
           observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in, .fade-in-up').forEach((el, i) => {
+    document.querySelectorAll('.fade-in, .fade-in-up').forEach((el) => {
       if (el instanceof HTMLElement) {
-        el.style.animationPlayState = 'paused';
-        el.dataset.index = `${i}`;
         observer.observe(el);
       }
     });
   });
+</script>
+
+<script>
+  console.log('index.astro script is running!');
 </script>
