@@ -3,7 +3,18 @@ import MainLayout from '@layouts/MainLayout.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import ProjectCard from '@components/ProjectCard.astro';
-import projects from '../data/projects.json';
+import ExperienceItem from '@components/ExperienceItem.astro';
+import TechnologiesList from '@components/TechnologiesList.astro';
+import FadeIn from '@components/FadeIn.astro';
+import type { Side, Project, Experience, Technology } from '../types';
+
+import projects from '../data/projects.json' assert { type: 'json' };
+import experiences from '../data/experience.json' assert { type: 'json' };
+import technologies from '../data/technologies.json' assert { type: 'json' };
+
+const typedProjects = projects as Project[];
+const typedExperiences = experiences as Experience[];
+const typedTechnologies = technologies as Technology[];
 
 const birthDate = new Date('1997-08-22');
 const age = Math.floor(
@@ -16,15 +27,15 @@ const age = Math.floor(
 
   <section id="home" class="py-24 sm:py-32 bg-[var(--bg-base)]">
     <div class="container text-center">
-      <h1 class="text-5xl sm:text-6xl md:text-7xl font-mono animate-fade-in">
+      <h1 class="text-5xl sm:text-6xl md:text-7xl font-mono fade-in-up">
         Hi, I'm Aleksandr Sokolov
       </h1>
-      <p class="mt-6 text-lg sm:text-xl max-w-2xl mx-auto">
+      <p class="mt-6 text-lg sm:text-xl max-w-2xl mx-auto fade-in-up">
         A Software Engineer
       </p>
       <a
         href="#projects"
-        class="mt-8 inline-block px-8 py-3 bg-[var(--accent)] text-[var(--bg-base)] rounded-lg hover:bg-[var(--accent-hover)] transition-colors duration-300"
+        class="mt-8 inline-block px-8 py-3 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors duration-300 fade-in-up"
       >
         View Projects
       </a>
@@ -33,65 +44,94 @@ const age = Math.floor(
 
   <section id="about" class="py-20 sm:py-24 bg-[var(--bg-subtle)]">
     <div class="container">
-      <h2 class="text-3xl sm:text-4xl font-mono animate-fade-in">About Me</h2>
-      <p class="mt-6 text-lg max-w-3xl">
-        I'm a Software Engineer. I'm {age} years old and love building things.
-      </p>
-      <ul class="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        <li
-          class="bg-[var(--bg-base)] p-3 rounded-lg text-center text-[var(--text-base)]"
-        >
-          JavaScript
-        </li>
-        <li
-          class="bg-[var(--bg-base)] p-3 rounded-lg text-center text-[var(--text-base)]"
-        >
-          TypeScript
-        </li>
-        <li
-          class="bg-[var(--bg-base)] p-3 rounded-lg text-center text-[var(--text-base)]"
-        >
-          Astro
-        </li>
-        <li
-          class="bg-[var(--bg-base)] p-3 rounded-lg text-center text-[var(--text-base)]"
-        >
-          Tailwind CSS
-        </li>
-      </ul>
-    </div>
-  </section>
+      <h2 class="text-3xl sm:text-4xl font-mono fade-in-up">About Me</h2>
 
-  <section id="projects" class="py-20 sm:py-24 bg-[var(--bg-base)]">
-    <div class="container">
-      <h2 class="text-3xl sm:text-4xl font-mono animate-fade-in">Projects</h2>
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <p class="mt-6 text-lg max-w-3xl fade-in-up">
+        I'm a Software Engineer who loves to build things. I'm {age} years old.
+      </p>
+
+      <div
+        class="mt-10 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         {
-          projects.map((project) => (
-            <ProjectCard
-              title={project.title}
-              description={project.description}
-              link={project.link}
-            />
+          typedTechnologies.map(({ category, items }, i) => (
+            <div
+              class="fade-in-up border border-[var(--border)] rounded-2xl bg-[var(--surface)] p-6 shadow-sm hover:shadow-md transition-all"
+              style={{ animationDelay: `${i * 0.15}s` }}
+            >
+              <h3 class="text-lg font-mono text-[var(--accent)] mb-4 text-center">
+                {category}
+              </h3>
+
+              <ul class="flex flex-wrap justify-center gap-2">
+                {items.map((tech, j) => (
+                  <li class="bg-[var(--surface)] p-2 rounded-lg text-center text-[var(--text-base)] border border-[var(--border)] text-sm">
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))
         }
       </div>
     </div>
   </section>
 
-  <section id="contact" class="py-20 sm:py-24 bg-[var(--bg-subtle)]">
+  <section id="experience" class="py-20 sm:py-24 bg-[var(--bg-base)]">
+    <div class="container">
+      <FadeIn delay={0.2} direction="up">
+        <h2 class="text-3xl sm:text-4xl font-mono mb-12">Experience</h2>
+      </FadeIn>
+      <div class="timeline-container">
+        {
+          typedExperiences.map((exp, index) => (
+            <div class="fade-in-up">
+              <ExperienceItem
+                company={exp.company}
+                position={exp.position}
+                duration={exp.duration}
+                description={exp.description}
+                side={exp.side as Side}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-20 sm:py-24 bg-[var(--bg-subtle)]">
+    <div class="container">
+      <h2 class="text-3xl sm:text-4xl font-mono mb-8 fade-in-up">Projects</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          typedProjects.map((project, index) => (
+            <div class="fade-in-up">
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                link={project.link}
+                imageUrl={project.imageUrl}
+                tags={project.tags}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 sm:py-24 bg-[var(--bg-base)]">
     <div class="container text-center">
-      <h2 class="text-3xl sm:text-4xl font-mono animate-fade-in">
-        Get in Touch
-      </h2>
-      <p class="mt-6 text-lg">
+      <h2 class="text-3xl sm:text-4xl font-mono fade-in-up">Get in Touch</h2>
+      <p class="mt-6 text-lg fade-in-up">
         Reach me at <a
           href="mailto:sokolawesome@gmail.com"
           class="text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors duration-300"
           >sokolawesome@gmail.com</a
         >
       </p>
-      <div class="mt-8 flex justify-center space-x-6">
+      <div class="mt-8 flex justify-center space-x-6 fade-in-up">
         <a
           href="https://github.com/sokolawesome"
           class="text-[var(--accent)] hover:text-[var(--accent-hover)] text-lg transition-colors duration-300"
@@ -109,19 +149,33 @@ const age = Math.floor(
   <Footer />
 </MainLayout>
 
-<style>
-  .animate-fade-in {
-    animation: fadeIn 1s ease-in;
-  }
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1,
+    };
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+          const delay = entry.target.dataset.index
+            ? parseFloat(entry.target.dataset.index) * 0.1
+            : 0;
+          entry.target.style.animationDelay = `${delay}s`;
+          entry.target.style.animationPlayState = 'running';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in, .fade-in-up').forEach((el, i) => {
+      if (el instanceof HTMLElement) {
+        el.style.animationPlayState = 'paused';
+        el.dataset.index = `${i}`;
+        observer.observe(el);
+      }
+    });
+  });
+</script>

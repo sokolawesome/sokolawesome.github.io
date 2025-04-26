@@ -1,0 +1,18 @@
+[
+  {
+    "category": "languages",
+    "items": ["Go", "TypeScript", "JavaScript"]
+  },
+  {
+    "category": "frameworks",
+    "items": ["React", "Astro"]
+  },
+  {
+    "category": "databases",
+    "items": ["PostgreSQL", "SQLite"]
+  },
+  {
+    "category": "tools",
+    "items": ["Docker", "GitHub Actions"]
+  }
+]

@@ -1,0 +1,39 @@
+---
+type Side = 'left' | 'right';
+
+export interface Props {
+  company: string;
+  position: string;
+  duration: string;
+  description: string;
+  side?: Side;
+}
+
+const {
+  company,
+  position,
+  duration,
+  description,
+  side = 'left',
+}: Props = Astro.props;
+
+const isLeft = side === 'left';
+const cardClass = `card p-6 sm:col-span-5 ${isLeft ? 'sm:col-start-2' : 'sm:col-start-7'}`;
+---
+
+<div class="timeline-item">
+  <div class="flex flex-col sm:grid sm:grid-cols-11 gap-4">
+    <div class="hidden sm:flex sm:col-span-1 justify-center">
+      <div class="w-4 h-4 rounded-full bg-[var(--accent)] mt-2"></div>
+    </div>
+
+    <div class={cardClass}>
+      <div class="flex items-start justify-between">
+        <h3 class="font-mono text-lg text-[var(--accent)]">{position}</h3>
+        <span class="text-sm text-[var(--text-muted)]">{duration}</span>
+      </div>
+      <div class="mt-1 font-medium">{company}</div>
+      <p class="mt-3 text-[var(--text-muted)]">{description}</p>
+    </div>
+  </div>
+</div>

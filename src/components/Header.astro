@@ -1,7 +1,10 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+
 const navItems = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -10,36 +13,161 @@ const navItems = [
 <header class="sticky top-0 bg-[var(--bg-base)] z-20 py-4 shadow-md">
   <nav class="container flex justify-between items-center">
     <a href="/" class="text-2xl font-mono text-[var(--accent)]">sokolawesome</a>
-    <ul class="hidden md:flex space-x-8">
-      {
-        navItems.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class="text-[var(--text-base)] hover:text-[var(--accent-hover)] transition-colors"
-            >
-              {item.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <button
-      class="md:hidden text-[var(--text-base)] hover:text-[var(--accent-hover)]"
-    >
-      Menu
-    </button>
+
+    <div class="hidden md:flex items-center space-x-6">
+      <ul class="flex space-x-8">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-[var(--text-base)] hover:text-[var(--accent-hover)] transition-colors"
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <ThemeToggle />
+    </div>
+
+    <div class="flex items-center space-x-2 md:hidden">
+      <ThemeToggle />
+      <button
+        id="mobile-menu-button"
+        aria-label="Toggle menu"
+        class="p-2 text-[var(--text-base)] hover:text-[var(--accent-hover)]"
+      >
+        <svg
+          id="menu-icon"
+          class="w-6 h-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg
+          id="close-icon"
+          class="w-6 h-6 hidden"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
   </nav>
+
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 z-10 bg-[var(--bg-base)] pt-20 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+  >
+    <div class="container">
+      <ul class="flex flex-col space-y-6 text-center">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-xl block py-2 text-[var(--text-base)] hover:text-[var(--accent-hover)] transition-colors"
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
 </header>
 
-<style>
-  button {
-    @apply px-4 py-2 rounded-lg;
-  }
-</style>
-
 <script>
-  document.querySelector('button')?.addEventListener('click', () => {
-    alert('Hamburger menu placeholder');
+  function createMobileMenu(options: {
+    buttonId: string;
+    menuId: string;
+    menuIconId: string;
+    closeIconId: string;
+  }) {
+    const { buttonId, menuId, menuIconId, closeIconId } = options;
+
+    const mobileMenuButton = document.getElementById(buttonId);
+    const mobileMenu = document.getElementById(menuId);
+    const menuIcon = document.getElementById(menuIconId);
+    const closeIcon = document.getElementById(closeIconId);
+
+    if (!mobileMenuButton || !mobileMenu || !menuIcon || !closeIcon) {
+      console.warn('Mobile menu elements not found.');
+      return;
+    }
+
+    function toggleMobileMenu() {
+      if (mobileMenu.classList.contains('translate-x-full')) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    }
+
+    function openMenu() {
+      mobileMenu.classList.remove('translate-x-full');
+      menuIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add('translate-x-full');
+      menuIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+    document.querySelectorAll(`#${menuId} a`).forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (
+        !mobileMenu.classList.contains('translate-x-full') &&
+        e.target instanceof Node &&
+        !mobileMenu.contains(e.target) &&
+        !mobileMenuButton.contains(e.target)
+      ) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (
+        e.key === 'Escape' &&
+        !mobileMenu.classList.contains('translate-x-full')
+      ) {
+        closeMenu();
+      }
+    });
+
+    return { openMenu, closeMenu };
+  }
+
+  createMobileMenu({
+    buttonId: 'mobile-menu-button',
+    menuId: 'mobile-menu',
+    menuIconId: 'menu-icon',
+    closeIconId: 'close-icon',
   });
 </script>

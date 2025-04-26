@@ -1,0 +1,17 @@
+---
+interface Props {
+  delay?: number;
+  direction?: 'up' | 'right' | 'left' | 'down' | 'none';
+  className?: string;
+}
+
+const { delay = 0, direction = 'up', className = '' } = Astro.props;
+const fadeClass = direction === 'none' ? 'fade-in' : `fade-in-${direction}`;
+---
+
+<div
+  class={`${fadeClass} ${className}`}
+  style={{ animationDelay: `${delay}s` }}
+>
+  <slot />
+</div>

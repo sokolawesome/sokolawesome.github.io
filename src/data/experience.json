@@ -1,0 +1,23 @@
+[
+  {
+    "company": "Tech Company A",
+    "position": "Senior Software Engineer",
+    "duration": "2023 - Present",
+    "description": "Working on enterprise-level Go services and distributed systems. Implementing microservice architecture and cloud-native solutions.",
+    "side": "left"
+  },
+  {
+    "company": "Tech Company B",
+    "position": "Software Engineer",
+    "duration": "2021 - 2023",
+    "description": "Developed and maintained backend services using Go. Implemented RESTful APIs and database integrations using PostgreSQL.",
+    "side": "right"
+  },
+  {
+    "company": "Tech Company C",
+    "position": "Junior Developer",
+    "duration": "2019 - 2021",
+    "description": "Worked on web applications using JavaScript and React. Contributed to frontend development and UI/UX improvements.",
+    "side": "left"
+  }
+]
