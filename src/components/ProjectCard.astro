@@ -9,11 +9,14 @@ const { title, description, link } = Astro.props;
 ---
 
 <div
-  class="p-4 bg-[#181825] rounded-lg shadow hover:scale-105 transition-transform"
+  class="p-6 bg-[var(--bg-subtle)] rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
 >
-  <h3 class="text-lg font-mono">{title}</h3>
-  <p class="mt-2">{description}</p>
-  <a href={link} class="mt-4 inline-block text-[var(--accent)] hover:underline">
-    View Project
+  <h3 class="text-xl font-mono text-[var(--accent)]">{title}</h3>
+  <p class="mt-3 text-base text-[var(--text-base)]/80">{description}</p>
+  <a
+    href={link}
+    class="mt-4 inline-block text-[var(--accent)] hover:text-[var(--accent-hover)] font-semibold"
+  >
+    View Project →
   </a>
 </div>

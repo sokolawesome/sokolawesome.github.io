@@ -7,27 +7,34 @@ const navItems = [
 ];
 ---
 
-<header class="sticky top-0 bg-[var(--bg-base)] z-10 py-4">
-  <nav class="container mx-auto px-4 flex justify-between items-center">
-    <a href="/" class="text-xl font-mono">Aleksandr Sokolov</a>
-    <ul class="hidden md:flex space-x-6">
+<header class="sticky top-0 bg-[var(--bg-base)] z-20 py-4 shadow-md">
+  <nav class="container flex justify-between items-center">
+    <a href="/" class="text-2xl font-mono text-[var(--accent)]">sokolawesome</a>
+    <ul class="hidden md:flex space-x-8">
       {
         navItems.map((item) => (
           <li>
-            <a href={item.href} class="hover:text-[var(--accent)]">
+            <a
+              href={item.href}
+              class="text-[var(--text-base)] hover:text-[var(--accent-hover)] transition-colors"
+            >
               {item.name}
             </a>
           </li>
         ))
       }
     </ul>
-    <button class="md:hidden">Menu</button>
+    <button
+      class="md:hidden text-[var(--text-base)] hover:text-[var(--accent-hover)]"
+    >
+      Menu
+    </button>
   </nav>
 </header>
 
 <style>
   button {
-    @apply text-[var(--text-base)] hover:text-[var(--accent)];
+    @apply px-4 py-2 rounded-lg;
   }
 </style>
 
