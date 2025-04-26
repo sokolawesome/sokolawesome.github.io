@@ -3,21 +3,21 @@
     "title": "Project 1",
     "description": "A modern web application built with React and Tailwind CSS, featuring responsive design and smooth animations.",
     "link": "https://github.com/sokolawesome",
-    "imageUrl": "images/placeholder-project.svg",
+    "imageUrl": "placeholder-project.svg",
     "tags": ["React", "TypeScript", "Tailwind CSS"]
   },
   {
     "title": "Project 2",
     "description": "A backend service developed with Go, implementing RESTful APIs and database integrations.",
     "link": "https://github.com/sokolawesome",
-    "imageUrl": "images/placeholder-project.svg",
+    "imageUrl": "placeholder-project.svg",
     "tags": ["Go", "PostgreSQL", "Docker"]
   },
   {
     "title": "Project 3",
     "description": "A CLI tool for automating development workflows, built with efficiency and developer experience in mind.",
     "link": "https://github.com/sokolawesome",
-    "imageUrl": "images/placeholder-project.svg",
+    "imageUrl": "placeholder-project.svg",
     "tags": ["Go", "CLI", "DevOps"]
   }
 ]
