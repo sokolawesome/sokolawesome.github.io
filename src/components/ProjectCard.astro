@@ -18,7 +18,7 @@ const {
   tags = [],
 }: Props = Astro.props;
 
-const projectImages = import.meta.glob(
+const projectImages = import.meta.glob<{ default: string }>(
   '/src/assets/images/*.{jpg,png,svg,jpeg}'
 );
 
@@ -34,7 +34,7 @@ const image = imageEntry ? await imageEntry() : undefined;
     {
       image ? (
         <Image
-          src={image.default}
+          src={image?.default}
           alt={`Screenshot of ${title}`}
           width={600}
           height={338}

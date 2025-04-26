@@ -4,10 +4,15 @@ interface Props {
 }
 
 const { title } = Astro.props;
-const globalCSS = import.meta.glob('/src/styles/global.css', {
-  query: '?url',
-  eager: true,
-})['/src/styles/global.css'].default;
+const globalCSSEntry = import.meta.glob<{ default: string }>(
+  '/src/styles/global.css',
+  {
+    query: '?url',
+    eager: true,
+  }
+)['/src/styles/global.css'];
+
+const globalCSS = (globalCSSEntry as { default: string }).default;
 ---
 
 <!doctype html>
