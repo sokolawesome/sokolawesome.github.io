@@ -1,18 +1,69 @@
 [
   {
-    "category": "languages",
-    "items": ["Go", "TypeScript", "JavaScript"]
+    "category": "Languages",
+    "items": [
+      "Go",
+      "Rust",
+      "TypeScript",
+      "JavaScript",
+      "C#",
+      "HTML5",
+      "CSS3"
+    ]
   },
   {
-    "category": "frameworks",
-    "items": ["React", "Astro"]
+    "category": "Backend",
+    "items": [
+      "Gin (Go)",
+      "Gorilla Mux (Go)",
+      "Tokio (Rust)",
+      "REST APIs",
+      "WebSockets"
+    ]
   },
   {
-    "category": "databases",
-    "items": ["PostgreSQL", "SQLite"]
+    "category": "Frontend",
+    "items": [
+      "React",
+      "Astro"
+    ]
   },
   {
-    "category": "tools",
-    "items": ["Docker", "GitHub Actions"]
+    "category": "Game & App Dev",
+    "items": [
+      "Ebiten (Go)",
+      "Fyne (Go)",
+      "ggez (Rust)",
+      "macroquad (Rust)",
+      "Unity (C#)"
+    ]
+  },
+  {
+    "category": "Databases",
+    "items": [
+      "PostgreSQL",
+      "Microsoft SQL Server",
+      "MySQL"
+    ]
+  },
+  {
+    "category": "Cloud & DevOps",
+    "items": [
+      "Docker",
+      "GitHub Actions",
+      "Azure",
+      "Oracle",
+      "Git",
+      "Linux Server Admin"
+    ]
+  },
+  {
+    "category": "Environment",
+    "items": [
+      "Arch Linux",
+      "macOS",
+      "Zsh",
+      "Kitty Terminal"
+    ]
   }
 ]

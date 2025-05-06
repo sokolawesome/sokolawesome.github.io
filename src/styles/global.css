@@ -132,11 +132,6 @@ section {
   @apply relative;
 }
 
-.timeline-container::after {
-  content: '';
-  @apply absolute top-0 bottom-0 w-px bg-[var(--border)] z-0;
-}
-
 .timeline-item {
   @apply relative z-10 mb-8;
 }
