@@ -1,0 +1,87 @@
+---
+
+---
+<div id="terminal" class="font-mono bg-[var(--bg-subtle)] text-[var(--text-base)] p-4 rounded-lg shadow-lg h-64 overflow-y-auto text-sm" tabindex="0">
+    <div id="terminal-output">
+      <div>Welcome to sokolawesome OS! Type 'help' for commands.</div>
+    </div>
+    <div class="flex items-center mt-2">
+      <span class="text-[var(--accent)]">user@sokolawesome:~$</span>
+      <input
+        type="text"
+        id="terminal-input"
+        class="bg-transparent border-none outline-none flex-grow ml-2 text-[var(--text-base)]"
+        autofocus
+      />
+    </div>
+  </div>
+  
+  <script>
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalContainer = document.getElementById('terminal');
+  
+    const commands = {
+      help: () => "Available commands: help, about, projects, contact, uses, clear, whoami, date",
+      about: () => "I'm Aleksandr Sokolov, a Software Engineer. More info on the <a href='/#about' class='text-[var(--accent-hover)] underline'>About</a> section.",
+      projects: () => "Check out my <a href='/#projects' class='text-[var(--accent-hover)] underline'>Projects</a>!",
+      contact: () => "Reach me at <a href='mailto:sokolawesome@gmail.com' class='text-[var(--accent-hover)] underline'>sokolawesome@gmail.com</a> or see the <a href='/#contact' class='text-[var(--accent-hover)] underline'>Contact</a> section.",
+      uses: () => "See what I use on the <a href='/uses' class='text-[var(--accent-hover)] underline'>Uses</a> page.",
+      clear: () => {
+        if (terminalOutput) terminalOutput.innerHTML = '';
+        return "";
+      },
+      whoami: () => "guest",
+      date: () => new Date().toString(),
+
+    };
+  
+    function appendOutput(htmlContent: string, isCommand = false) {
+      if (terminalOutput) {
+        const div = document.createElement('div');
+        div.classList.add('text-left');
+        if (isCommand) {
+          const escapedHtmlContent = htmlContent.replace(/</g, "<").replace(/>/g, ">");
+          div.innerHTML = `<span class="text-[var(--accent)]">user@sokolawesome:~$</span> ${escapedHtmlContent}`;
+        } else {
+          div.innerHTML = htmlContent;
+        }
+        terminalOutput.appendChild(div);
+        if (terminalContainer) {
+          terminalContainer.scrollTop = terminalContainer.scrollHeight;
+      }
+      }
+    }
+  
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && terminalInput) {
+        const commandLine = terminalInput.value.trim();
+        appendOutput(commandLine, true);
+        terminalInput.value = '';
+  
+        if (commandLine) {
+          const [commandName, ...args] = commandLine.split(' ');
+          if (commands[commandName]) {
+            try {
+            const result = commands[commandName](args);
+            if (result) appendOutput(result);
+          } catch (error) {
+            console.error("Error executing command:", error);
+            appendOutput(`Error: ${error.message || "An unknown error occurred."}`);
+          }
+        } else {
+          appendOutput(`Command not found: ${commandName}. Type 'help'.`);
+        }
+      }
+      terminalInput.focus();
+    }
+  });
+
+  if (terminalContainer && terminalInput) {
+    terminalContainer.addEventListener('click', () => {
+        terminalInput.focus();
+    });
+    // Initial focus
+    terminalInput.focus();
+  }
+  </script>

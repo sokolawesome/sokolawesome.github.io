@@ -1,0 +1,74 @@
+[
+    {
+        "category": "Hardware",
+        "items": [
+            {
+                "name": "PC",
+                "description": "AMD Ryzen 7 7700, GeForce RTX 3080 Ti, 64GB RAM"
+            },
+            {
+                "name": "Monitor",
+                "description": "HUAWEI MateView GT 34 3440x1440 165Hz"
+            },
+            {
+                "name": "Keyboard",
+                "description": "Nuphy Halo65"
+            },
+            {
+                "name": "Mouse",
+                "description": "Logitech MX Master 3S"
+            }
+        ]
+    },
+    {
+        "category": "Software & OS",
+        "items": [
+            {
+                "name": "Operating System",
+                "description": "Arch Linux, btw"
+            },
+            {
+                "name": "Code Editor",
+                "description": "VS Code"
+            },
+            {
+                "name": "Terminal",
+                "description": "Kitty Terminal with Zsh"
+            },
+            {
+                "name": "Browser",
+                "description": "Zen browser"
+            }
+        ]
+    },
+    {
+        "category": "Development Tools",
+        "items": [
+            {
+                "name": "Version Control",
+                "description": "Git & Lazygit & Github"
+            },
+            {
+                "name": "Containerization",
+                "description": "Docker"
+            },
+            {
+                "name": "API Testing",
+                "description": "Curl & HTTPie"
+            }
+        ]
+    },
+    {
+        "category": "Desk Setup",
+        "items": [
+            {
+                "name": "Desk",
+                "description": "Standing Desk Frame + Custom Top"
+            },
+            {
+                "name": "Chair",
+                "description": "ThunderX3"
+            }
+        ]
+    }
+]

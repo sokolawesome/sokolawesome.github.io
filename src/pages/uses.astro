@@ -1,0 +1,68 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import usesData from '../data/uses.json' assert { type: 'json' };
+
+interface UsesItem {
+  name: string;
+  description: string;
+}
+
+interface UsesCategory {
+  category: string;
+  items: UsesItem[];
+}
+
+const typedUsesData = usesData as UsesCategory[];
+---
+
+<MainLayout title="Uses | Aleksandr Sokolov">
+    <Header />
+        <div class="container py-16">
+            <h1 class="text-4xl sm:text-5xl font-mono mb-12 text-center">
+            What I Use
+            </h1>
+            {typedUsesData.map((categorySection, sectionIndex) => (
+            <section class={`mb-12 fade-in-up stagger-${sectionIndex + 1}`}>
+                <h2 class="text-2xl sm:text-3xl font-mono text-[var(--accent)] mb-6">
+                {categorySection.category}
+                </h2>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                {categorySection.items.map((item) => (
+                    <li class="py-2 border-b border-[var(--border)]">
+                    <h3 class="text-lg font-semibold">{item.name}</h3>
+                    <p class="text-[var(--text-muted)]">{item.description}</p>
+                    </li>
+                ))}
+                </ul>
+            </section>
+            ))}
+        </div>
+    <Footer />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1,
+          };
+    
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, observerOptions);
+    
+          document.querySelectorAll('.fade-in, .fade-in-up').forEach((el) => {
+            if (el instanceof HTMLElement) {
+              observer.observe(el);
+            }
+          });
+        });
+      </script>
+</MainLayout>

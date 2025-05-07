@@ -5,6 +5,7 @@ import Footer from '@components/Footer.astro';
 import ProjectCard from '@components/ProjectCard.astro';
 import ExperienceItem from '@components/ExperienceItem.astro';
 import TechnologiesList from '@components/TechnologiesList.astro';
+import Terminal from '@components/Terminal.astro';
 import type { Side, Project, Experience, Technology } from '../types';
 
 import projects from '../data/projects.json' assert { type: 'json' };
@@ -34,6 +35,9 @@ const age = Math.floor(
       <p class="mt-6 text-lg sm:text-xl max-w-2xl mx-auto fade-in-up stagger-2">
         A Software Engineer
       </p>
+      <div class="mt-12 max-w-2xl mx-auto fade-in-up stagger-3"> {}
+        <Terminal /> {}
+      </div>
     </div>
   </section>
 
@@ -137,28 +141,3 @@ const age = Math.floor(
 
   <Footer />
 </MainLayout>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.target instanceof HTMLElement) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in, .fade-in-up').forEach((el) => {
-      if (el instanceof HTMLElement) {
-        observer.observe(el);
-      }
-    });
-  });
-</script>
